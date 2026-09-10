@@ -1,0 +1,23 @@
+[
+    {
+        "order_id": "ORD1001",
+        "customer": "Dharani",
+        "product": "HP Laptop",
+        "status": "Shipped",
+        "delivery_date": "2026-09-12"
+    },
+    {
+        "order_id": "ORD1002",
+        "customer": "Dharani",
+        "product": "Wireless Mouse",
+        "status": "Delivered",
+        "delivery_date": "2026-09-05"
+    },
+    {
+        "order_id": "ORD1003",
+        "customer": "Dharani",
+        "product": "Bluetooth Headphones",
+        "status": "Processing",
+        "delivery_date": "2026-09-14"
+    }
+]

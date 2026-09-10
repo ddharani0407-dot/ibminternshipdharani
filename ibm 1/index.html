@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI IT Helpdesk Agent</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 600px;
+            margin: 50px auto;
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px #ccc;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        #chat {
+            height: 350px;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+
+        .user {
+            margin: 10px 0;
+            text-align: right;
+        }
+
+        .ai {
+            margin: 10px 0;
+            text-align: left;
+        }
+
+        input {
+            width: 75%;
+            padding: 12px;
+            box-sizing: border-box;
+        }
+
+        button {
+            width: 20%;
+            padding: 12px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>🤖 AI IT Helpdesk</h1>
+
+    <div id="chat"></div>
+
+    <input
+        type="text"
+        id="message"
+        placeholder="Ask about products, orders, returns..."
+    >
+
+    <button onclick="sendMessage()">Send</button>
+
+</div>
+
+<script>
+
+async function sendMessage() {
+
+    const input = document.getElementById("message");
+    const chat = document.getElementById("chat");
+
+    const message = input.value.trim();
+
+    if (message === "") {
+        return;
+    }
+
+    chat.innerHTML += `
+        <div class="user">
+            <b>You:</b> ${message}
+        </div>
+    `;
+
+    input.value = "";
+
+    const response = await fetch("/chat", {
+
+        method: "POST",
+
+        headers: {
+            "Content-Type": "application/json"
+        },
+
+        body: JSON.stringify({
+            message: message
+        })
+
+    });
+
+    const data = await response.json();
+
+    chat.innerHTML += `
+        <div class="ai">
+            <b>AI:</b> ${data.reply}
+        </div>
+    `;
+
+    chat.scrollTop = chat.scrollHeight;
+}
+
+</script>
+
+</body>
+</html>
